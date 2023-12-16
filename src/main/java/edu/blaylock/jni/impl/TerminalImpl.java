@@ -2,7 +2,9 @@ package edu.blaylock.jni.impl;
 
 import edu.blaylock.jni.structs.ConsoleScreenBufferInfo;
 import edu.blaylock.terminal.events.Record;
+import edu.blaylock.terminal.util.Utils;
 
+import java.io.IOException;
 import java.util.Arrays;
 
 
@@ -10,7 +12,7 @@ public class TerminalImpl {
     private long stdin, stdout, stderr;
 
     public TerminalImpl() throws Exception {
-        boolean success = intialize();
+        boolean success = initialize();
         if(!success) {
             throw new Exception();
         }
@@ -33,7 +35,7 @@ public class TerminalImpl {
 
     public native int getOutputCharacterEncoding();
 
-    public native boolean intialize();
+    public native boolean initialize();
 
     public long getStdin(){
         return stdin;

@@ -10,7 +10,7 @@ public class Utils {
         InputStream in = Utils.class.getResourceAsStream(path);
         assert in != null;
 
-        File temp = File.createTempFile("terminal", ".dll");
+        File temp = File.createTempFile("temp", ".dll");
         temp.deleteOnExit();
         FileOutputStream fos = new FileOutputStream(temp);
 

@@ -128,10 +128,10 @@ JNIEXPORT jboolean JNICALL Java_edu_blaylock_jni_impl_TerminalImpl_setOutputChar
 
 /*
  * Class:     jni_impl_TerminalImpl
- * Method:    intialize
+ * Method:    initialize
  * Signature: ()Z
  */
-JNIEXPORT jboolean JNICALL Java_edu_blaylock_jni_impl_TerminalImpl_intialize
+JNIEXPORT jboolean JNICALL Java_edu_blaylock_jni_impl_TerminalImpl_initialize
         (JNIEnv * env, jobject jobj) {
     const void* stdin_handle = GetStdHandle(STD_INPUT_HANDLE);
     const void* stdout_handle = GetStdHandle(STD_OUTPUT_HANDLE);

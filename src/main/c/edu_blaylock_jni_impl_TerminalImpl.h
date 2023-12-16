@@ -85,7 +85,7 @@ JNIEXPORT jint JNICALL Java_edu_blaylock_jni_impl_TerminalImpl_getOutputCharacte
  * Method:    intialize
  * Signature: ()Z
  */
-JNIEXPORT jboolean JNICALL Java_edu_blaylock_jni_impl_TerminalImpl_intialize
+JNIEXPORT jboolean JNICALL Java_edu_blaylock_jni_impl_TerminalImpl_initialize
   (JNIEnv *, jobject);
 
 #ifdef __cplusplus
