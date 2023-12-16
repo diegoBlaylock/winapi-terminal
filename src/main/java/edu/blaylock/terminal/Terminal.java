@@ -6,7 +6,9 @@ import edu.blaylock.jni.structs.ConsoleScreenBufferInfo;
 import edu.blaylock.terminal.events.EventDispatcher;
 import edu.blaylock.terminal.io.Reader;
 import edu.blaylock.terminal.io.Writer;
+import edu.blaylock.terminal.util.Utils;
 
+import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -22,12 +24,17 @@ public class Terminal {
 
 
     static {
-        global_instance = new Terminal();
-        initialStdinMode = global_instance.in.getConsoleMode();
-        initialStdoutMode = global_instance.out.getConsoleMode();
-        initialStderrMode = global_instance.err.getConsoleMode();
-        initialOutputEncoding = global_instance.impl.getOutputCharacterEncoding();
-        dispatcher = new EventDispatcher(global_instance.impl, 1024);
+        try {
+            Utils.loadDll("/terminal.dll");
+            global_instance = new Terminal();
+            initialStdinMode = global_instance.in.getConsoleMode();
+            initialStdoutMode = global_instance.out.getConsoleMode();
+            initialStderrMode = global_instance.err.getConsoleMode();
+            initialOutputEncoding = global_instance.impl.getOutputCharacterEncoding();
+            dispatcher = new EventDispatcher(global_instance.impl, 1024);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public static Terminal getInstance() {
@@ -43,14 +50,10 @@ public class Terminal {
 
     public final Reader in;
 
-    private TerminalImpl impl;
+    private final TerminalImpl impl;
 
-    public Terminal() {
-        try{
-            impl = new TerminalImpl();
-        }catch(Exception e){
-            System.exit(1);
-        }
+    public Terminal() throws Exception{
+        impl = new TerminalImpl();
         STDOUT = impl.getStdout();
         STDIN = impl.getStdin();
         STDERR = impl.getStderr();

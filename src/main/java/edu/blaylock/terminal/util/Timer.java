@@ -1,13 +1,13 @@
 package edu.blaylock.terminal.util;
 
 public class Timer{
-    final Object TIMER_LOCK = new Object();
-    final Runnable runnable;
-    final Thread thread;
+    private final Object TIMER_LOCK = new Object();
+    private final Runnable runnable;
+    private final Thread thread;
 
-    volatile long milli;
-    volatile boolean isStopped = true;
-    volatile boolean cancelled = false;
+    private final long milli;
+    private volatile boolean isStopped = true;
+    private volatile boolean cancelled = false;
 
     public Timer(Runnable runnable, long milli, String name) {
         synchronized (TIMER_LOCK) {
@@ -52,11 +52,9 @@ public class Timer{
         while(!cancelled) {
             long start = System.currentTimeMillis();
 
-
-
             if (isStopped) {
                 try {
-                    synchronized (this) {
+                    synchronized (this.TIMER_LOCK) {
                         wait();
                     }
                 } catch (InterruptedException e) {

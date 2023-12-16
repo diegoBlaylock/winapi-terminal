@@ -6,7 +6,7 @@ public class Reader {
     private final TerminalImpl impl;
     private final long handle;
 
-    private byte[] buffer;
+    private final byte[] buffer;
 
     public Reader(long handle, TerminalImpl impl, int buffer_size) {
         this.handle = handle;

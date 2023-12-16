@@ -1,7 +1,7 @@
 #include "base_structs.h"
 
 jobject genCoord(JNIEnv * env, COORD const* coordinate) {
-    jclass clazz = env->FindClass("edu/blaylock/jni/structs/Coord");
+    jclass clazz =  env->FindClass("edu/blaylock/jni/structs/Coord");
     jmethodID constructor = env->GetMethodID(clazz, "<init>", "(SS)V");
     jobject jobj = env->NewObject(clazz, constructor, coordinate->X, coordinate->Y);
     return jobj;

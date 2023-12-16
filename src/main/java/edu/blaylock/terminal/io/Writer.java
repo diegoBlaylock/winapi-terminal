@@ -4,15 +4,13 @@ import edu.blaylock.jni.flags.BufferMode;
 import edu.blaylock.jni.impl.TerminalImpl;
 import edu.blaylock.jni.structs.ConsoleScreenBufferInfo;
 
-import java.nio.charset.StandardCharsets;
-
 public class Writer {
-    private StringBuilder writeBuffer = new StringBuilder();
+    private final StringBuilder writeBuffer = new StringBuilder();
     private BufferMode bufferMode = BufferMode.LINE_FLUSH;
 
-    private TerminalImpl impl;
+    private final TerminalImpl impl;
 
-    private long handle;
+    private final long handle;
 
     public Writer(long handle, TerminalImpl impl, BufferMode buffer){
         this.handle = handle;
@@ -39,7 +37,7 @@ public class Writer {
         print("\n");
     }
 
-    public void print_flush(String message) {
+    public void printFlush(String message) {
         print(message);
         flush();
     }
